@@ -1,0 +1,25 @@
+tests/test_data/*
+## The .gitignore file specifies things that git should ignore.
+.git/
+
+data/*
+!*data/notes/slides_day_1.pptx
+!data/.gitkeep
+
+# files after building package
+dist/
+build/
+*.egg-info/
+
+# Testing
+tests/.pytest_cache/*
+tests/pytest_basetemp/*
+tests/reports/*
+
+# IDE
+__pycache__/
+.idea
+.mypy_cache/
+.vscode/
+ha_venv
+.env
