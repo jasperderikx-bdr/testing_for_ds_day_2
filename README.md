@@ -11,7 +11,8 @@ Testing for Data Science</h2>
 
 <h4 align="center">Day 2</h4>
 
-This part of the training focuses on implementing tests in your data science project. 
+This part of the training focuses on implementing tests in your data science project. You will learn about test coverage,
+monkeypatching, caching among other things. See the slides: ```data\notes\slides_day_2.pptx```.
 
 ## ⚡ Installation
 
@@ -56,12 +57,15 @@ git checkout -b <branch-name>
 git push
 ```
 
+Note: if you run into the error: "The unauthenticated git protocol on port 9418 is no longer supported.", this [stackoverflow page](https://stackoverflow.com/questions/70663523/the-unauthenticated-git-protocol-on-port-9418-is-no-longer-supported) might help.
+
 
 ## 📋 Assignment
 
 ---
 
-After you completed the installation, work yourself through the exercises in the ```tests\test_<subject>.py```.
+After you completed the installation, work yourself through the exercises in the test files: ```tests\conftest.py``` and ```tests\test_<subject>.py```.
+Make sure that you answer the exercises (1 to 8) in the right order.
 
 You've completed the assignment if:
 - You answered all exercises.

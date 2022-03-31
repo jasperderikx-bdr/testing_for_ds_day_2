@@ -18,7 +18,7 @@ class DishwasherModel:
 
         # Define model pipeline.
         pipeline = Pipeline([("add_recipe_duration", AddRecipeDuration()),
-                             ("RFR", RandomForestRegressor())])
+                             ("RFR", RandomForestRegressor(random_state=37))])
 
         # Determine best hyper parameters.
         grid = GridSearchCV(pipeline,
@@ -26,12 +26,10 @@ class DishwasherModel:
                                         "RFR__n_estimators": [25, 50, 100, 200, 400]},
                             cv=10)
         grid.fit(x_train, y_train)
-
         self.test_score = grid.best_estimator_.score(x_test, y_test)
 
         # Train on all labeled data.
         grid.best_estimator_.fit(x, y)
-
         self.estimator = grid.best_estimator_
 
     def predict(self, data: pd.DataFrame) -> pd.DataFrame:
