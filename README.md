@@ -17,7 +17,7 @@ monkeypatching, caching among other things. See the slides: ```data\notes\slides
 ## ⚡ Installation
 
 ---
-###1. Virtual Environment
+### 1. Virtual Environment
 
 Create a virtual environment for this repo, for instance with [Anaconda](https://docs.anaconda.com/anaconda/install/):
 
@@ -29,7 +29,7 @@ conda activate testing_for_data_science
 You can use the same virtual environment for the whole training.
 Note: if you just installed anaconda, you might have to initialize your terminal with ```conda init <SHELL_NAME>``` and restart your terminal afterwards.
 
-###2. Install dependencies
+### 2. Install dependencies
 
 Install the project in develop mode, with:
    
@@ -38,7 +38,7 @@ pip install -e ".[develop]"
 ```
 This will install all the dependencies listed in ```requirements.txt``` and ```requirements.dev.txt```. Have a look at them to get an idea with what we're working.
 
-###3. setup pre-commit
+### 3. setup pre-commit
 
 We will be using pre-commit for this project, install it with:
 
@@ -49,7 +49,7 @@ pre-commit install
 If you commit your code, pre-commit will run some checks. Only if you pass the checks, the commit is completed.
 For example, it checks whether you've used type-hinting. See .pre-commit-config.yaml for the full configuration.
 
-###4. create your own branch
+### 4. create your own branch
 
 
 ```sh
