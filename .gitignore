@@ -1,10 +1,10 @@
-tests/test_data/*
 ## The .gitignore file specifies things that git should ignore.
 .git/
 
 data/*
 !*data/notes/slides_day_1.pptx
-!data/.gitkeep
+!data/dishwasher_registration.csv
+
 
 # files after building package
 dist/
