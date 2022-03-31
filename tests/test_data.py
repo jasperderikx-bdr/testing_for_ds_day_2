@@ -17,19 +17,23 @@ def test_scrape_duration_from_recipe_page(monkeypatch: MonkeyPatch) -> None:
     assert duration == "20 min. bereiden"
 
 
-def test_scrape_duration_from_recipe_page_bad_page(monkeypatch: MonkeyPatch) -> None:
-    class MockRequestsGet:
-        def __init__(self, url: str):
-            self.content = "<bad html>"
+# -- Exercise 1 --
+# The previous test doesn't cover every line of scrape_duration_from_recipe_page(). Find out with ```pytest --cov```
+# which lines of that function are not covered and write a test for them.
 
-    monkeypatch.setattr(requests, "get", MockRequestsGet)
-    duration = scrape_duration_from_recipe_page(url="")
-    assert duration == ""
 
+# -- Exercise 2 --
+# Previously, requests.get was replaced with the contents of tests/test_data/dummy_recipe_page.txt. Therefor the test is
+# repeatable and doesn't require an internet connection. A worse solution is caching the recipe page, but for learning
+# purposes let's implement it anyway. Write a test for scrape_duration_from_recipe_page() that still replaces
+# requests.get, but know with a cached version of the webpage that it retrieved from the internet.
+
+
+# -- Exercise 3 --
+# Besides full line coverage, we want to make sure that a function works for all realistic inputs. Make sure that both
+# of these reasons are satisfied by adding parameter values to the next test.
 
 @pytest.mark.parametrize("text, expected",
-                         [("2 uur", 120),
-                          ("30 min. bereiden", 30),
-                          ("1 uur 30 min. bereiden", 90)])
+                         [("1 uur", 60)])
 def test_parse_duration(text: str, expected: int) -> None:
     assert parse_duration(text) == expected

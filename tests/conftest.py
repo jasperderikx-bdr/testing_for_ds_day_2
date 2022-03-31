@@ -1,4 +1,4 @@
-from random import randint
+import random
 from typing import Dict, Iterator
 
 import pytest
@@ -12,6 +12,10 @@ import dishwashers.model
 
 @pytest.fixture(scope="session")
 def monkey_session() -> Iterator[MonkeyPatch]:
+    """This fixture is identical to monkeypatch, except it has a broader scope.
+
+    This enables fixtures with a scope other than 'function', to make use of monkeypatch.
+    """
     mp = MonkeyPatch()
     yield mp
     mp.undo()
@@ -26,9 +30,16 @@ def restrict_grid_search(monkey_session: MonkeyPatch) -> None:
     monkey_session.setattr(dishwashers.model, "GridSearchCV", MockGridSearchCV)
 
 
+#  -- Exercise 6 --
+# We've made sure scrape_duration_from_recipe_page() is tested for several scenarios in tests\test_data.py. To
+# drastically reduce the runtime of the other tests, we want to monkeypatch it. The whole fixture is already written,
+# al that is left is to complete the last line.
+# Let the test in exercise 5 depend on this fixture and check with ```pytest --duration[-1]``` how much time is gained.
 @pytest.fixture(scope="module")
 def mock_scraper(monkey_session: MonkeyPatch) -> None:
-    def mock_function(url: str) -> str:
-        return f"{randint(10, 59)} min. bereiden"
+    random.seed(10)
 
-    monkey_session.setattr(dishwashers.data, "scrape_duration_from_recipe_page", mock_function)
+    def mock_function(url: str) -> str:
+        return f"{random.randint(10, 59)} min. bereiden"
+
+    # monkey_session.setattr(..., ..., mock_function)

@@ -33,10 +33,6 @@ files = [
 testpaths = [
     "tests",
 ]
-env = [
-    "DISHWASHER_REGISTRATION_PATH=tests/test_data/dummy_dishwasher_registration.csv",
-    "PREDICTIONS_PATH=tests/pytest_basetemp/dummy_predictions.csv"
-]
 markers = [
 "slow: marks tests as slow (deselect with '-m \"not slow\"')",
 ]
@@ -60,9 +56,7 @@ ignore_errors = false
 fail_under = 80
 precision = 0
 show_missing = true
-exclude_lines = [
-    "if __name__ == .__main__.:"
-]
+
 [tool.coverage.xml]
 output = "tests/reports/coverage.xml"
 

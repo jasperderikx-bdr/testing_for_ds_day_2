@@ -56,6 +56,8 @@ git checkout -b <branch-name>
 git push
 ```
 
+Note: if you run into the error: "The unauthenticated git protocol on port 9418 is no longer supported.", this [stackoverflow page](https://stackoverflow.com/questions/70663523/the-unauthenticated-git-protocol-on-port-9418-is-no-longer-supported) might help.
+
 
 ## 📋 Assignment
 
