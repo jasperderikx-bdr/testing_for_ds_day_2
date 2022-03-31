@@ -18,8 +18,8 @@ def test_scrape_duration_from_recipe_page(monkeypatch: MonkeyPatch) -> None:
 
 
 # -- Exercise 1 --
-# The previous test doesn't cover every line of scrape_duration_from_recipe_page(). Find out with ```pytest --cov```
-# which lines of that function are not covered and write a test for them.
+# The previous test doesn't cover every line of scrape_duration_from_recipe_page(). Find out with
+# ```pytest --cov dishwashers tests\test_data.py``` which lines of that function are not covered. Write a test for them.
 
 
 # -- Exercise 2 --

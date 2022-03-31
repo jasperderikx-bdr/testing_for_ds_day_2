@@ -33,8 +33,8 @@ def retrieve_first_number(text: str, pattern: str) -> int:
 
 def parse_duration(text: str) -> int:
     """Converts string that contains duration to number of minutes. Typical example: '1 uur 30 min. bereiden' -> 90."""
-    minutes = retrieve_first_number(text, "[0-9]+ min.")
-    hours = retrieve_first_number(text, "[0-9]+ uur")
+    minutes = retrieve_first_number(text, "[0-9]* min.")
+    hours = retrieve_first_number(text, "[0-9]* uur")
     return hours * 60 + minutes
 
 

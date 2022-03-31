@@ -34,7 +34,8 @@ def restrict_grid_search(monkey_session: MonkeyPatch) -> None:
 # We've made sure scrape_duration_from_recipe_page() is tested for several scenarios in tests\test_data.py. To
 # drastically reduce the runtime of the other tests, we want to monkeypatch it. The whole fixture is already written,
 # al that is left is to complete the last line.
-# Let the test in exercise 5 depend on this fixture and check with ```pytest --duration[-1]``` how much time is gained.
+# Let the test in exercise 5 depend on this fixture and check with ```pytest --durations=-1 tests\test_model.py```
+# how much time is gained.
 @pytest.fixture(scope="module")
 def mock_scraper(monkey_session: MonkeyPatch) -> None:
     random.seed(10)
