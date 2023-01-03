@@ -12,7 +12,7 @@ with open("requirements.dev.txt") as f:
     develop_requirements = f.read().splitlines()
 
 setuptools.setup(
-    name="testing_for_data_science_day_2",
+    name="testing_for_ds_day_2",
     version="0.0.1",
     author="Jasper Derikx",
     author_email="jasper.derikx@bigdatarepublic.nl",
