@@ -4,5 +4,5 @@
 
 
 # -- Exercise 5 --
-# Write a test that uses the fixture you just created to test that all predictions are on the unlabeled data in
+# Write a test that uses the fixture you just created to test that all predictions on the unlabeled data in
 # dummy_dishwasher_registration.csv are positive.
