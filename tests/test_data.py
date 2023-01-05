@@ -35,7 +35,7 @@ def test_scrape_duration_from_miscellaneous_page(monkeypatch: MonkeyPatch, tmp_p
 
 
 # -- Exercise 2 --
-# Previously, requests.get was replaced with the contents of tests/test_data/dummy_recipe_page.txt. Therefor the test is
+# Above, requests.get was replaced with the contents of tests/test_data/dummy_recipe_page.txt. Therefor the test is
 # repeatable and doesn't require an internet connection. A worse solution is caching the recipe page, but for learning
 # purposes let's implement it anyway. Write a test for scrape_duration_from_recipe_page() that still replaces
 # requests.get, but know with a cached version of the webpage that it retrieved from the internet.
@@ -60,6 +60,8 @@ def test_scrape_duration_from_cached_recipe_page(monkeypatch: MonkeyPatch, reque
 # -- Exercise 3 --
 # Besides full line coverage, we want to make sure that a function works for all realistic inputs. Make sure that both
 # of these reasons are satisfied by adding parameter values to the next test.
+# 1) Cover all code from both retrieve_first_number() and parse_duration().
+# 2) For realistic inputs have a look at a few recipe pages from the data.
 
 @pytest.mark.parametrize("text, expected",
                          [("1 uur", 60)])
