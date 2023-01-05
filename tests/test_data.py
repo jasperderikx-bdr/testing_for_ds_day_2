@@ -64,6 +64,9 @@ def test_scrape_duration_from_cached_recipe_page(monkeypatch: MonkeyPatch, reque
 # 2) For realistic inputs have a look at a few recipe pages from the data.
 
 @pytest.mark.parametrize("text, expected",
-                         [("1 uur", 60)])
+                         [("1 uur", 60),
+                          (" uur", 0),
+                          ("10 min. bereiden", 10),
+                          ("1 uur 10 min. bereiden", 70)])
 def test_parse_duration(text: str, expected: int) -> None:
     assert parse_duration(text) == expected
