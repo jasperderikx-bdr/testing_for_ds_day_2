@@ -1,3 +1,5 @@
+from pathlib import PosixPath
+
 import pytest
 import requests  # type: ignore
 from _pytest.monkeypatch import MonkeyPatch
@@ -20,6 +22,14 @@ def test_scrape_duration_from_recipe_page(monkeypatch: MonkeyPatch) -> None:
 # -- Exercise 1 --
 # The previous test doesn't cover every line of scrape_duration_from_recipe_page(). Find out with
 # ```pytest --cov dishwashers tests\test_data.py``` which lines of that function are not covered. Write a test for them.
+def test_scrape_duration_from_miscellaneous_page(monkeypatch: MonkeyPatch, tmp_path: PosixPath) -> None:
+    class MockRequestsGet:
+        def __init__(self, url: str):
+            self.content = ""
+
+    monkeypatch.setattr(requests, "get", MockRequestsGet)
+    duration = scrape_duration_from_recipe_page(url="")
+    assert duration == ""
 
 
 # -- Exercise 2 --
@@ -27,6 +37,15 @@ def test_scrape_duration_from_recipe_page(monkeypatch: MonkeyPatch) -> None:
 # repeatable and doesn't require an internet connection. A worse solution is caching the recipe page, but for learning
 # purposes let's implement it anyway. Write a test for scrape_duration_from_recipe_page() that still replaces
 # requests.get, but know with a cached version of the webpage that it retrieved from the internet.
+def test_scrape_duration_from_cached_recipe_page(monkeypatch: MonkeyPatch) -> None:
+    class MockRequestsGet:
+        def __init__(self, url: str):
+            with open(DUMMY_RECIPE_PAGE_PATH) as f:
+                self.content = "".join(f.readlines())
+
+    monkeypatch.setattr(requests, "get", MockRequestsGet)
+    duration = scrape_duration_from_recipe_page(url="")
+    assert duration == "20 min. bereiden"
 
 
 # -- Exercise 3 --
