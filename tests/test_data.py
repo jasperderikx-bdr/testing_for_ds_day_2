@@ -1,11 +1,13 @@
 from pathlib import PosixPath
 
+import pandas as pd
 import pytest
 import requests  # type: ignore
+from _pytest.fixtures import FixtureRequest
 from _pytest.monkeypatch import MonkeyPatch
 
 from dishwashers.data import parse_duration, scrape_duration_from_recipe_page
-from tests.generate_test_data import DUMMY_RECIPE_PAGE_PATH
+from tests.generate_test_data import DUMMY_DISHWASHER_REGISTRATION_PATH, DUMMY_RECIPE_PAGE_PATH
 
 
 def test_scrape_duration_from_recipe_page(monkeypatch: MonkeyPatch) -> None:
@@ -37,11 +39,18 @@ def test_scrape_duration_from_miscellaneous_page(monkeypatch: MonkeyPatch, tmp_p
 # repeatable and doesn't require an internet connection. A worse solution is caching the recipe page, but for learning
 # purposes let's implement it anyway. Write a test for scrape_duration_from_recipe_page() that still replaces
 # requests.get, but know with a cached version of the webpage that it retrieved from the internet.
-def test_scrape_duration_from_cached_recipe_page(monkeypatch: MonkeyPatch) -> None:
+def test_scrape_duration_from_cached_recipe_page(monkeypatch: MonkeyPatch, request: FixtureRequest) -> None:
+    cached_recipe_page = request.config.cache.get("cached_recipe_page", None)
+    if cached_recipe_page is None:
+        dummy_dishwasher_registration = pd.read_csv(DUMMY_DISHWASHER_REGISTRATION_PATH)
+        url = dummy_dishwasher_registration["url"].iloc[0]
+        response = requests.get(url=url)
+        cached_recipe_page = response.text
+        request.config.cache.set("cached_recipe_page", cached_recipe_page)
+
     class MockRequestsGet:
         def __init__(self, url: str):
-            with open(DUMMY_RECIPE_PAGE_PATH) as f:
-                self.content = "".join(f.readlines())
+            self.content = cached_recipe_page
 
     monkeypatch.setattr(requests, "get", MockRequestsGet)
     duration = scrape_duration_from_recipe_page(url="")
