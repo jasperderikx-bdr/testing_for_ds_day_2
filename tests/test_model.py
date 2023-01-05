@@ -10,7 +10,7 @@ from dishwashers.model import DishwasherModel
 
 # -- Exercise 4 --
 # Write a module scoped fixture that yields an instance of DishwasherModel, trained on the labelled data in
-# dummy_dishwasher_registration.csv. Make it depend on the fixture restrict_grid_search().
+# dummy_dishwasher_registration.csv (using get_trainings_data()). Let it depend on the fixture restrict_grid_search().
 @pytest.fixture(scope="module")
 def trained_dishwasher_model(restrict_grid_search: None) -> Iterator[DishwasherModel]:
     dishwasher_model = DishwasherModel()

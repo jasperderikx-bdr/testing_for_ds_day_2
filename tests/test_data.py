@@ -62,7 +62,6 @@ def test_scrape_duration_from_cached_recipe_page(monkeypatch: MonkeyPatch, reque
 # of these reasons are satisfied by adding parameter values to the next test.
 # 1) Cover all code from both retrieve_first_number() and parse_duration().
 # 2) For realistic inputs have a look at a few recipe pages from the data.
-
 @pytest.mark.parametrize("text, expected",
                          [("1 uur", 60),
                           (" uur", 0),
