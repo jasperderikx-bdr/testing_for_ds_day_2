@@ -23,7 +23,7 @@ def test_scrape_duration_from_recipe_page(monkeypatch: MonkeyPatch) -> None:
 
 
 # -- Exercise 2 --
-# Previously, requests.get was replaced with the contents of tests/test_data/dummy_recipe_page.txt. Therefor the test is
+# Above, requests.get was replaced with the contents of tests/test_data/dummy_recipe_page.txt. Therefor the test is
 # repeatable and doesn't require an internet connection. A worse solution is caching the recipe page, but for learning
 # purposes let's implement it anyway. Write a test for scrape_duration_from_recipe_page() that still replaces
 # requests.get, but know with a cached version of the webpage that it retrieved from the internet.
