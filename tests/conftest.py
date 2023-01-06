@@ -39,7 +39,7 @@ def restrict_grid_search(monkey_session: MonkeyPatch) -> None:
 # drastically reduce the runtime of the other tests, we want to monkeypatch it. The whole fixture is already written,
 # al that is left is to complete the last line.
 # Let the fixture of exercise 4 and the test in exercise 5 depend on this fixture.
-# Check with ```pytest --durations=-1 tests\test_model.py``` how much time is gained.
+# Check with ```pytest --durations=-1 tests/test_model.py``` how much time is gained.
 @pytest.fixture(scope="module")
 def mock_scraper(monkey_session: MonkeyPatch) -> None:
     random.seed(10)
