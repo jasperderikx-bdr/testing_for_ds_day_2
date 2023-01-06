@@ -1,13 +1,17 @@
 import random
+from pathlib import Path
 from typing import Dict, Iterator
 
 import pytest
 from _pytest.monkeypatch import MonkeyPatch
+from generate_test_data import DUMMY_DISHWASHER_REGISTRATION_PATH
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 
 import dishwashers.data
 import dishwashers.model
+from dishwashers.data import get_prediction_data, get_trainings_data
+from dishwashers.model import DishwasherModel
 
 
 @pytest.fixture(scope="session")
@@ -43,4 +47,19 @@ def mock_scraper(monkey_session: MonkeyPatch) -> None:
     def mock_function(url: str) -> str:
         return f"{random.randint(10, 59)} min. bereiden"
 
-    # monkey_session.setattr(..., ..., mock_function)
+    monkey_session.setattr(dishwashers.data, "scrape_duration_from_recipe_page", mock_function)
+
+
+# This is how you should change the fixture and test of exercise 4 and 5.
+@pytest.fixture(scope="module")
+def trained_dishwasher_model_copy(restrict_grid_search: None, mock_scraper: None) -> Iterator[DishwasherModel]:
+    dishwasher_model = DishwasherModel()
+    trainings_data = get_trainings_data(file_path=Path(DUMMY_DISHWASHER_REGISTRATION_PATH))
+    dishwasher_model.train(data=trainings_data)
+    yield dishwasher_model
+
+
+def test_predictions_are_positive_copy(trained_dishwasher_model_copy: DishwasherModel, mock_scraper: None) -> None:
+    prediction_data = get_prediction_data(file_path=Path(DUMMY_DISHWASHER_REGISTRATION_PATH))
+    predictions = trained_dishwasher_model_copy.predict(data=prediction_data)
+    assert (predictions["prediction_dishwashers"] > 0).all()
