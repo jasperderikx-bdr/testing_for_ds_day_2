@@ -1,0 +1,74 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel==0.36.2",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.isort]
+line_length = 120
+profile = "black"
+
+[tool.flake8]
+max-line-length = 120
+exclude = "build/*, data/*"
+per-file-ignores = "tests/*:D1"
+docstring-convention = "google"
+ignore = "W605, W503, N812, N817, D100, D101, D102, D103, D104, D105, D107"
+
+[tool.mypy]
+python_version = "3.10"
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+disable_error_code = [
+    "attr-defined"
+]
+files = [
+    "dishwashers/**/*.py",
+    "tests/**/*.py"
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
+testpaths = [
+    "tests",
+]
+markers = [
+"slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
+addopts = "--basetemp tests/pytest_basetemp"
+cache_dir = "tests/.pytest_cache"
+junit_suite_name = "test_training"
+junit_family = "xunit1"
+filterwarnings = [
+    'ignore::DeprecationWarning'
+]
+env = [
+    "DISHWASHER_REGISTRATION_PATH=tests/test_data/dummy_dishwasher_registration.csv",
+    "PREDICTIONS_PATH=tests/pytest_basetemp/dummy_predictions.csv"
+]
+
+[tool.coverage.run]
+branch = false
+omit = [
+    "tests/*",
+]
+data_file = "tests/reports/.coverage"
+
+[tool.coverage.report]
+ignore_errors = false
+fail_under = 80
+precision = 0
+show_missing = true
+exclude_lines = [
+    "if __name__ == .__main__.:"
+]
+
+[tool.coverage.xml]
+output = "tests/reports/coverage.xml"
+
+[tool.coverage.html]
+directory = "tests/reports/htmlcov"

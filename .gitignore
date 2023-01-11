@@ -2,8 +2,10 @@
 .git/
 
 data/*
-!*data/notes/slides_day_1.pptx
-!data/dishwasher_registration.csv
+!*data/notes/slides_day_2.pptx
+!*data/notes/slides_day_2.pdf
+!*data/solutions/
+!*data/dishwasher_registration.csv
 
 
 # files after building package
