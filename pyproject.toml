@@ -46,6 +46,10 @@ junit_family = "xunit1"
 filterwarnings = [
     'ignore::DeprecationWarning'
 ]
+env = [
+    "DISHWASHER_REGISTRATION_PATH=tests/test_data/dummy_dishwasher_registration.csv",
+    "PREDICTIONS_PATH=tests/pytest_basetemp/dummy_predictions.csv"
+]
 
 [tool.coverage.run]
 branch = false
@@ -59,6 +63,9 @@ ignore_errors = false
 fail_under = 80
 precision = 0
 show_missing = true
+exclude_lines = [
+    "if __name__ == .__main__.:"
+]
 
 [tool.coverage.xml]
 output = "tests/reports/coverage.xml"

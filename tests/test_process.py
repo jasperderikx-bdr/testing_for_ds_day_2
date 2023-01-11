@@ -1,4 +1,6 @@
-from dishwashers.process import main
+import pandas as pd
+
+from dishwashers.process import PREDICTIONS_PATH, main
 
 
 # -- Exercise 7 --
@@ -17,6 +19,10 @@ from dishwashers.process import main
 # How do you know that it worked?
 def test_process_main(restrict_grid_search: None, mock_scraper: None) -> None:
     main()
+
+    # To make sure that this test works with the dummy data, we check the number of output rows. On the original data
+    # this number should be 35.
+    assert 10 == pd.read_csv(PREDICTIONS_PATH).shape[0]
 
 # -- Exercise 8 --
 # If all exercises are completed, the code coverage is almost 100%. There is only 1 line left. In this specific case
